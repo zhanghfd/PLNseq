@@ -3,16 +3,23 @@ function(d){
     
     dat0 = sweep(d$count,2,d$sample$sizeFactor,'/');
 
-    I = ncol(dat0);
+    R = d$conditionNumber;
+    I = ncol(dat0)/R;
     J = nrow(dat0);
-    alpha = matrix(rep(rowMeans(dat0),I),ncol=I);
+    
+    x = array(NA,c(J,R,I));
+    for(r in 1:R){
+      x[,r,] = dat0[,1:I+(r-1)*I];
+    }
+    
+    alpha = apply(x,1:2,mean);
     
     ##########################################
     # deviance-based estimates for sigma
     ##########################################
     fn = function(sig){
         phi.inv = 1/(exp(sig^2)-1);
-        res = 2 * sum(dat0*log(dat0/alpha)-(dat0+phi.inv)*log((phi.inv+dat0)/(phi.inv+alpha)))-(I-1)*J;
+        res = 2*sum(x*log(sweep(x,1:2,alpha,'/'))-(x+phi.inv)*log(sweep(x+phi.inv,1:2,alpha+phi.inv,'/'))) - R*(I-1)*J;
         return(res);
     }
 

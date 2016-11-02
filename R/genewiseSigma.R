@@ -7,17 +7,25 @@ genewiseSigma <-
     R = d$conditionNumber;
     I = ncol(dat)/R;
     
-    alpha = matrix(rep(rowMeans(dat),I*R),ncol=I*R);
+    x = array(NA,c(J,R,I));
+    for(r in 1:R){
+      x[,r,] = dat[,1:I+(r-1)*I];
+    }
     
-    w1 = w/(I*R-1);
+    alpha = apply(x,1:2,mean);
+    
+    w1 = w/((I-1)*R);
     
     top.n = 3e2;
     sigmas = seq(0.01,1,.01);
     n.sigma = length(sigmas);
-    
+
     fn = function(sig){
       phi.inv = 1/(exp(sig^2)-1);
-      res = 2 * rowSums(dat*log(dat/alpha)-(dat+phi.inv)*log((phi.inv+dat)/(phi.inv+alpha)))-(I*R-1);
+      res = 0;
+      for(r in 1:R){
+        res = res + 2*apply(x[,r,]*log(sweep(x[,r,],1,alpha[,r],'/'))-(x[,r,]+phi.inv)*log(sweep(x[,r,]+phi.inv,1,alpha[,r]+phi.inv,'/')),1,sum) - (I-1);
+      }
       return(res);
     }
     

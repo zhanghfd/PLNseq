@@ -1,14 +1,14 @@
-\name{LRtest}
-\alias{LRtest}
+\name{LRtest1}
+\alias{LRtest1}
 
 \title{
-Likelihood ratio test for differential expression analysis
+Likelihood ratio test for differential expression analysis with common correlation.
 }
 \description{
-This function calculates log-fold changes, likelihood ratio test statistics, and p-values for a list of genes.
+This function calculates log-fold changes, likelihood ratio test statistics, and p-values for a list of genes. This function should be called after a commom correlation matrix is returned by `correlationCoefficient'.
 }
 \usage{
-    LRtest(d,z,use.commonSigma,id)
+    LRtest1(d,z,use.commonSigma,id)
 }
 
 \arguments{
@@ -16,7 +16,7 @@ This function calculates log-fold changes, likelihood ratio test statistics, and
     This is a PLNseq object.
     }
     \item{z}{
-    J independent samples (a matrix of dimension J by R) drown from multivariate normal distribution with expectations 0, variances 1, and a common correlation coefficient estimated by `correlationCoefficient'.
+    J independent samples (a matrix of dimension J by R) drown from multivariate normal distribution with expectations 0, variances 1, and a common correlation coefficient matrix estimated by `correlationCoefficient'.
     }
     \item{use.commonSigma}{
     Use common `sigma' (TRUE) or genewise `sigma' (FALSE), with default value `FALSE'.
@@ -39,20 +39,17 @@ This function calculates log-fold changes, likelihood ratio test statistics, and
     d = PLNobject(count,conditionNumber=2);
     d = sizeFactor(d,maxCount=2e3);
 
-    d = commonSigma(d);
-    d = correlationCoefficient(d);
-    
-    ##  d = LRtest(d,z,use.commonSigma=TRUE,id=1:100);
-    
-    ##  or 
-    
     ##  Not run:
+    ##  d = commonSigma(d);
+    ##  d$commonCorrelation = TRUE;
+    ##  d = correlationCoefficient(d);
     ##  d = genewiseSigma(d);
     ##  library('MASS');
     ##  z = mvrnorm(n=1e5,mu=rep(0,2),Sigma=d$rho);
-    ##  d = LRtest(d,z,use.commonSigma=FALSE,id=1:100);
+    ##  d = LRtest1(d,z,use.commonSigma=FALSE,id=1:100);
 }
 
 \keyword{differential expression}
 \keyword{likelihood ratio test}
 \keyword{correlated read count}
+\keyword{common correlation}

@@ -59,27 +59,55 @@ function(d){
         rhos[,r2,r1] = rhos[,r1,r2];
       }
     }
-#    rhos = rhos * (I-1)/(I-1.75);
-
-    rhohat = matrix(1,R,R);
-    s.rho = matrix(0,R,R);
-    inv.alpha = 1/apply(dat,1:2,mean);
-    for(r1 in 1:(R-1)){
+    
+    if(d$commonCorrelation){
+      
+      rhohat = matrix(1,R,R);
+      s.rho = matrix(0,R,R);
+      inv.alpha = 1/apply(dat,1:2,mean);
+      for(r1 in 1:(R-1)){
         for(r2 in (r1+1):R){
-            tmp = sqrt((phi+inv.alpha[,r1]) * (phi+inv.alpha[,r2])) * rhos[,r1,r2];
-            rhohat[r1,r2] = log(1+mean(tmp))/(sig^2);
-            s.rho[r1,r2] = sd(tmp)/sqrt(J)/sig^2/(1+mean(tmp));
+          tmp = sqrt((phi+inv.alpha[,r1]) * (phi+inv.alpha[,r2])) * rhos[,r1,r2];
+          rhohat[r1,r2] = log(1+mean(tmp))/(sig^2);
+          s.rho[r1,r2] = sd(tmp)/sqrt(J)/sig^2/(1+mean(tmp));
         }
-    }
-    for(r1 in 2:R){
+      }
+      for(r1 in 2:R){
         for(r2 in 1:(r1-1)){
-            rhohat[r1,r2] = rhohat[r2,r1];
-            s.rho[r1,r2] = s.rho[r2,r1];
+          rhohat[r1,r2] = rhohat[r2,r1];
+          s.rho[r1,r2] = s.rho[r2,r1];
         }
-    }
+      }
+      
+    }else{
+      n.cluster = length(unique(d$cluster));
 
-    d$rho = rhohat;
-    d$rho.se = s.rho;
+      rhohat = array(1,c(n.cluster,R,R));
+      s.rho = array(0,c(n.cluster,R,R));
+      inv.alpha = 1/apply(dat,1:2,mean);
+  
+      for(i in 1:n.cluster){
+        id = which(d$cluster==i);
+        Ji = length(id);
+        for(r1 in 1:(R-1)){
+          for(r2 in (r1+1):R){
+              tmp = sqrt((phi+inv.alpha[id,r1]) * (phi+inv.alpha[id,r2])) * rhos[id,r1,r2];
+              rhohat[i,r1,r2] = log(1+mean(tmp))/(sig^2);
+              s.rho[i,r1,r2] = sd(tmp)/sqrt(Ji)/sig^2/(1+mean(tmp));
+          }
+        }
+      }
+      for(i in 1:n.cluster){
+        for(r1 in 2:R){
+          for(r2 in 1:(r1-1)){
+              rhohat[i,r1,r2] = rhohat[i,r2,r1];
+              s.rho[i,r1,r2] = s.rho[i,r2,r1];
+          }
+        }
+      }
+    }
+    d$rho = apply(rhohat,1,as.vector);
+    d$rho.se = apply(s.rho,1,as.vector);
 
     return(d);
 

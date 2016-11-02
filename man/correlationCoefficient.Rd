@@ -30,7 +30,18 @@ correlationCoefficient(d)
     d = PLNobject(count,2);
     d = sizeFactor(d,maxCount=2e3);
     d = commonSigma(d);
-    d = correlationCoefficient(d);
+    
+    ## common correlation
+	## commonCorrelation = TRUE;
+    ## d = correlationCoefficient(d);
+    
+    ## clustered correlation
+	## commonCorrelation = FALSE;
+    ## J = nrow(count);
+    ## J1 = round(J/2);
+    ## d$cluster = c(rep(1,J1),rep(2,J-J1));
+    ## d = correlationCoefficient(d);
+    
 }
 
 \keyword{correlation coefficient} 
