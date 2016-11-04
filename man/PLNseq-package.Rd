@@ -25,11 +25,11 @@ Maintainer: Hong Zhang <zhanghd@fudan.edu.cn>
 }
 
 \references{
-Zhang, H., Xu, J., Jiang N., Hu, X., and Luo, Z. (2013). PLNseq: A multivariate Poisson lognormal distribution for high-throughput matched RNA-sequencing read count data.
+Zhang, H., Xu, J., Jiang N., Hu, X., and Luo, Z. (2015). PLNseq: A multivariate Poisson lognormal distribution for high-throughput matched RNA-sequencing read count data. Statistics in Medicine 34: 1577-1589.
 }
 \keyword{ package }
 
 %\seealso{
 %}
 %\examples{
-%} 
+%}
