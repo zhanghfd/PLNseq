@@ -7,6 +7,6 @@ The manual file is "PLNseq-manual.pdf".
 
 Installation of PLNseq in R:
 
-library(‘devtools’);
+> library(‘devtools’);
 
-install_github(‘zhanghfd/PLNseq’);
+> install_github(‘zhanghfd/PLNseq’);
