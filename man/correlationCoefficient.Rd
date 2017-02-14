@@ -5,7 +5,7 @@
 Correlation coefficient
 }
 \description{
-Estimate correlation coefficient parameter and its standard error in the multivariate lognormal distribution.
+Estimate correlation coefficient parameter(s) and the corresponding standard error(s) in the multivariate lognormal distribution. The correlation can be either common to all genes or cluster specific (the genes in each cluster share a common correlation).
 }
 
 \usage{
@@ -30,18 +30,18 @@ correlationCoefficient(d)
     d = PLNobject(count,2);
     d = sizeFactor(d,maxCount=2e3);
     d = commonSigma(d);
-    
+
     ## common correlation
-	## commonCorrelation = TRUE;
+	  ## d$commonCorrelation = TRUE;
     ## d = correlationCoefficient(d);
-    
+
     ## clustered correlation
-	## commonCorrelation = FALSE;
+	  ## d$commonCorrelation = FALSE;
     ## J = nrow(count);
     ## J1 = round(J/2);
     ## d$cluster = c(rep(1,J1),rep(2,J-J1));
     ## d = correlationCoefficient(d);
-    
+
 }
 
-\keyword{correlation coefficient} 
+\keyword{correlation coefficient}

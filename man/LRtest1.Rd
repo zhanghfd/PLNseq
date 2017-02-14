@@ -22,7 +22,7 @@ This function calculates log-fold changes, likelihood ratio test statistics, and
     Use common `sigma' (TRUE) or genewise `sigma' (FALSE), with default value `FALSE'.
     }
     \item{id}{
-    A vector consisting of a subset of {1,...,J}, with default value 1:J.
+    A vector consisting of a subset of {1,...,J}, with default value 1:J (all genes are analyzed).
     }
 }
 

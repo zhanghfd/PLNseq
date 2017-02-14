@@ -22,7 +22,7 @@ This function calculates log-fold changes, likelihood ratio test statistics, and
     Use common `sigma' (TRUE) or genewise `sigma' (FALSE), with default value `FALSE'.
     }
     \item{id}{
-    A vector consisting of a subset of {1,...,J}, with default value 1:J.
+    A vector consisting of a subset of {1,...,J}, with default value 1:J (all genes are analyzed).
     }
 }
 
@@ -38,7 +38,7 @@ This function calculates log-fold changes, likelihood ratio test statistics, and
     count = lung[,c(2:4,8:10)];
     d = PLNobject(count,conditionNumber=2);
     d = sizeFactor(d,maxCount=2e3);
-    
+
     ##  Not run:
     ##  d = commonSigma(d);
     ##  J = nrow(count);

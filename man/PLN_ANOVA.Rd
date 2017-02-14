@@ -1,11 +1,11 @@
-\name{PLN-ANOVA}
-\alias{PLN-ANOVA}
+\name{PLN_ANOVA}
+\alias{PLN_ANOVA}
 
 \title{
 Differential expression analysis based on a rank-reduced ANOVA model.
 }
 \description{
-This function returns the u estimates and DE analysis results including estimated log-fold changes and the correponding estimated standard deviations, and DE test p-values.
+This function returns the u estimates and DE analysis results including estimated log-fold changes (`logFoldChange') and the correponding estimated standard errors (`sd.logFoldChange'), and DE test p-values (`p.value').
 }
 \usage{
     PLN_ANOVA(d,n.top=1e3)
@@ -21,7 +21,7 @@ This function returns the u estimates and DE analysis results including estimate
 }
 
 \value{
-    \item{ANOVA}{A list containg `u', `log2FoldChange', and `sd.log2FoldChange', and `p.value'}
+    \item{d$ANOVA}{A list containg `u', `logFoldChange', and `sd.logFoldChange', and `p.value'}
 }
 
 
@@ -33,7 +33,7 @@ This function returns the u estimates and DE analysis results including estimate
     d = sizeFactor(d,maxCount=2e3);
 
     ##  Not run:
-    ##  d = commonSigma(d);  
+    ##  d = commonSigma(d);
     ##  d = genewiseSigma(d);
     ##  d = correlationCoefficient(d);
     ##  d = PLN_ANOVA(d,n.top=1e3);
