@@ -21,7 +21,7 @@ This function returns the u estimates and DE analysis results including estimate
 }
 
 \value{
-    \item{d$ANOVA}{A list containg `u', `logFoldChange', and `sd.logFoldChange', and `p.value'}
+    \item{d$ANOVA}{A list containg `u', `logFoldChange', `sd.logFoldChange', and `p.value'}
 }
 
 
