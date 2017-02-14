@@ -32,7 +32,7 @@ correlationCoefficient(d)
     d = commonSigma(d);
 
     ## common correlation
-	  ## d$commonCorrelation = TRUE;
+    ## d$commonCorrelation = TRUE;
     ## d = correlationCoefficient(d);
 
     ## clustered correlation

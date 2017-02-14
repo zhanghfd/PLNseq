@@ -35,6 +35,7 @@ This function returns the u estimates and DE analysis results including estimate
     ##  Not run:
     ##  d = commonSigma(d);
     ##  d = genewiseSigma(d);
+    ##  d$commonCorrelation = TRUE;
     ##  d = correlationCoefficient(d);
     ##  d = PLN_ANOVA(d,n.top=1e3);
 }
